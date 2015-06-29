@@ -45,6 +45,30 @@
 
   <div class="content pure-u-1 pure-u-md-3-4">
     <div>
+      <!-- A wrapper for all the blog posts -->
+      <div class="posts">
+        <h1 class="content-subhead">Exercise</h1>
+
+        <!-- A single blog post -->
+        <section class="post">
+          <header class="post-header">
+            <h2 class="post-title">Mean And Medium</h2>
+
+            <p class="post-meta">
+              6.29.2015 -  <a class="post-category post-category-design" href="#">Lynda JS Code Clinic</a> <a class="post-category post-category-pure" href="#">AJAX</a> <a class="post-category post-category-js" href="#">JSON</a>
+            </p>
+          </header>
+
+          <div class="post-description">
+            <p>
+              As part of that testing the US Navy compiles an exhaustive list of weather statistics such as wind speed, air temperature, and barometric pressure. You can browse this data by pointing your web browser at http://lpo.dt.navy.mil.  In this challenge, each of our authors will use their favorite language to calculate the mean and median of the wind speed, air temperature, and barometric pressure, recorded at the Deep Moor station for a given range of dates.</p>
+          </div>
+          <div class="post-content">
+            <a class="pure-button pure-button-primary">My Solution</a>
+          </div>
+        </section>
+      </div>
+
 
 
       <div class="footer">
@@ -59,6 +83,54 @@
     </div><!-- .box? -->
   </div><!-- /.content -->
 </div><!-- /.layout -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+  $(function() {
+    'use strict';
+
+    function loadChart() {
+      $.ajax({
+        url: 'http://foundationphp.com/phpclinic/podata.php?&raw',
+        jsonpCallback: 'jsonReturnData',
+        dataType: 'jsonp',
+        data: {
+          startDate: '20150301',
+          endDate: '20150302',
+          format: 'json'
+        },
+        success: function(data) {
+          // abstract into some function
+
+          for (var date in data) {
+            console.log(data[date]);
+
+
+            for (var props in data[date]) {
+              var values = data[date][props];
+              var meanDivider = values.length;
+              var meanTotal;
+              console.log(props);
+              console.log(values);
+              console.log(meanDivider);
+              // get mean
+              for (var i = 0; i < meanDivider; i++) {
+                meanTotal = values.slice(i, (i+1));
+                console.log(meanTotal);
+                console.log(meanDivider);
+              }// creating master array
+              // get medium
+            }// loop through each object in date s. t. p.
+
+          } // loop through json to get dates requested
+
+        }
+      });
+    } // load Chart
+
+    loadChart();
+  }); //page loaded
+</script>
 
 </body>
 </html>
