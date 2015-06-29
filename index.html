@@ -108,18 +108,40 @@
 
             for (var props in data[date]) {
               var values = data[date][props];
-              var meanDivider = values.length;
-              var meanTotal;
-              console.log(props);
-              console.log(values);
-              console.log(meanDivider);
-              // get mean
-              for (var i = 0; i < meanDivider; i++) {
-                meanTotal = values.slice(i, (i+1));
-                console.log(meanTotal);
-                console.log(meanDivider);
-              }// creating master array
-              // get medium
+              var totalValues = values.length;
+              var numValues;
+              var indValues;
+              var meanTotal = 0; // reset mean + medium counter
+              console.log(props + ': ' + totalValues);
+
+              for (var i = 0; i < totalValues; i++) {
+                indValues = values.slice(i, (i+1));
+                numValues = parseFloat(indValues);
+                meanTotal += numValues;
+              } // get mean
+              console.log('mean: ' + (meanTotal/totalValues));
+              if (totalValues % 2 === 0) {
+                // we even
+                console.log('even');
+                // sort the array in order of smallest to largest
+                // how?
+
+                // loop through elements
+
+                  // check if current element was less than the next
+
+                    // if yes do nothing
+
+                    // if no then
+
+
+
+              } else {
+                // we odd
+                console.log('odd');
+
+              } // get medium
+
             }// loop through each object in date s. t. p.
 
           } // loop through json to get dates requested
