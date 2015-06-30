@@ -67,6 +67,10 @@
             <a class="pure-button pure-button-primary">My Solution</a>
           </div>
         </section>
+        <figure>
+          <div id="chart"></div>
+          <figcaption>Click and drag on the bottom chart to see a smaller range</figcaption>
+        </figure>
       </div>
 
 
@@ -155,13 +159,14 @@
         jsonpCallback: 'jsonReturnData',
         dataType: 'jsonp',
         data: {
-          startDate: '20150301',
-          endDate: '20150302',
+          startDate: '20150305',
+          endDate: '20150326',
           format: 'json'
         },
         success: function(response){
           console.log(response);
           console.log(processData(response));
+          generateChart(processData(response));
         }
       });
     } // ajaxin' stuff
@@ -223,13 +228,32 @@
 
         data: {
           x: 'x',
-          columns: data
+          columns: data,
+          type: 'bar',
+          groups: [
+            [
+            'Mean Temperature',
+            'Median Temperature',
+            'Mean Pressure',
+            'Median Pressure',
+            'Mean Speed',
+            'Median Speed'
+            ]
+          ]
+        },
+        bar: {
+          width: {
+            ratio: 0.3
+          }
         },
         axis: {
           x: {
             type: 'timeseries'
           }
-        } // axis
+        }, // axis
+        subchart: {
+          show: true
+        }
       }); // chart
     } // generateChart
 
