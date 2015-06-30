@@ -89,7 +89,7 @@
   $(function() {
     'use strict';
 
-    function loadChart() {
+    function ajaxData() {
       $.ajax({
         url: 'http://foundationphp.com/phpclinic/podata.php?&raw',
         jsonpCallback: 'jsonReturnData',
@@ -144,9 +144,35 @@
 
         }
       });
-    } // load Chart
+    } // ajaxData
+    ajaxData();
 
-    loadChart();
+
+    //Lynda Solutions to mean + medium
+
+
+    function getMean(myArray) {
+      var mean = myArray.reduce(function(a,b){
+        return a + b;
+      })/myArray.length;
+      return mean.toFixed(2)
+    }
+
+    function getMedian(myArray) {
+      var median;
+      var sorted = myArray.sort(myArray);
+      var middleIndex = Math.floor(sorted.length/2)
+      if (sorted.length % 2 === 0) {
+        var medianA = sorted[middleIndex];
+        var medianB = sorted[middleIndex - 1];
+      } else {
+        median = sorted[middleIndex]
+      }
+
+      return median.toFixed(2);
+    }
+
+
   }); //page loaded
 </script>
 
