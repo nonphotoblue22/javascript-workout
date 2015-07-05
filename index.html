@@ -61,12 +61,55 @@
 
           <div class="post-description">
             <p>
-              As part of that testing the US Navy compiles an exhaustive list of weather statistics such as wind speed, air temperature, and barometric pressure. You can browse this data by pointing your web browser at http://lpo.dt.navy.mil.  In this challenge, each of our authors will use their favorite language to calculate the mean and median of the wind speed, air temperature, and barometric pressure, recorded at the Deep Moor station for a given range of dates.</p>
+            In the Lynda challenge, the goal was to calculate the mean and median of the wind speed,
+            air temperature, and barometric pressure, recorded at the Deep Moor station
+            for a given range of dates using javascript as the chosen language. The data
+            would be taken from a list the US Navy compiles during their submarine testing in Lake Pend Oreille.
+            Weather statistics such as wind speed, air temperature, and barometric
+            pressure should be ajaxed in by using a restful api that returned a jsonp object filled with data from this site:
+            http://lpo.dt.navy.mil.
+            </p>
+            <h4>Reflections</h4>
+            <p>
+            For this exercise I was just concentrating on getting a successful response from
+            the api and writing a mean and median functionality. After comparing my solutions to the offered
+            solutions, there were a few things that really stood out to me that I hope
+            to take away. Firstly, the lynda solutions did a much better job of
+            abstracting out the functionality and keeping code simple. For example, their solutions to the mean function simply
+            takes an array argument and uses the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">reduce</a>
+            method to add everything up in that array argument, and simply divides that
+            sum by the total number of the items in the array. The final step was
+            setting the returned mean to a nicer fixed point value.
+            <br />
+            I'm happy that my mean solution returned the correct mean values, but
+            becuase I didn't know about the reduce method I feel that my function was a bit more
+            cumbersome. Instead, I used a for loop to loop through the length of the
+            array, and used the counter to slice each individual item into a variable to be parsed to a
+            floating point integer. Then, I used an additional assignment operator to
+            add it to a 'MeanTotal' variable. Once the loop was finished, the total sum of the
+            array values were divided by the total array length giving the accurate mean value
+            (possibly too accurate, I probably should've used the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed</a>
+            function to return a nice number).
+            </p>
+            <h4>Going Further</h4>
+            <p>
+            The lesson went on to actually complete the solution really thouroughly. They visualized the
+            data and created drop down menus to dynamically update the range of dates. While
+            those weren't in the scope of my personal goal for the challenge, I
+            followed along and completed the interesting parts of the challenge. It was
+            really the first time I had seen and used the <a
+            href="http://c3js.org/">c3</a> library, which is an impressive tool. Also,
+            it was really good to go through the neccessary steps to massage the data so
+            c3 could display the data correctly. It was surprising how much more work that
+            was than I had thought about the problem before watching and following their
+            suggested solution. Below is the product of their suggested solution.
+            </p>
           </div>
           <div class="post-content">
             <a class="pure-button pure-button-primary">My Solution</a>
           </div>
         </section>
+        <h4>Provided Solution</h4>
         <figure>
           <div id="chart"></div>
           <figcaption>Click and drag on the bottom chart to see a smaller range</figcaption>
@@ -91,176 +134,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="/js/libs/d3.min.js" charset="utf-8"></script>
 <script src="/js/libs/c3.min.js"></script>
-<script>
-  $(function() {
-    'use strict';
-
-    function ajaxData() {
-      $.ajax({
-        url: 'http://foundationphp.com/phpclinic/podata.php?&raw&callback=?',
-        jsonpCallback: 'jsonReturnData',
-        dataType: 'jsonp',
-        data: {
-          startDate: '20150301',
-          endDate: '20150302',
-          format: 'json'
-        },
-        success: function(data) {
-          // abstract into some function
-
-          for (var date in data) {
-            console.log(data[date]);
-            for (var props in data[date]) {
-              var values = data[date][props];
-              var totalValues = values.length;
-              var numValues;
-              var indValues;
-              var orderedValue1 = (totalValues/2) - 1;
-              var orderedValue2 = (totalValues/2) + 1;
-              var sortedValues = [];
-              var meanTotal = 0; // reset mean + medium counter
-              console.log(props + ': ' + totalValues);
-
-              for (var i = 0; i < totalValues; i++) {
-                indValues = values.slice(i, (i+1));
-                numValues = parseFloat(indValues);
-                sortedValues.push(numValues);
-                meanTotal += numValues;
-              } // get mean
-              console.log('mean: ' + (meanTotal/totalValues));
-
-              // sort the array in order of smallest to largest
-              sortedValues.sort();
-
-              if (totalValues % 2 === 0) {
-                // get the mean of two middle numbers
-                console.log('medium(even): ' + ((orderedValue1 + orderedValue2)/2));
-                // return (orderedValue1 + orderedValue2)/2;
-              } else {
-                // we odd
-                console.log('medium(odd): ' + sortedValues.slice(orderedValue1, orderedValue2));
-                // return sortedValues.slice(orderedValue1, orderedValue2);
-              } // get medium
-
-            }// loop through each object in date s. t. p.
-
-          } // loop through json to get dates requested
-
-        }
-      });
-    } // ajaxData
-
-
-
-    //Lynda Solutions to mean + medium
-    function loadChart() {
-      $.ajax({
-        url: 'http://foundationphp.com/phpclinic/podata.php?&raw&callback=?',
-        jsonpCallback: 'jsonReturnData',
-        dataType: 'jsonp',
-        data: {
-          startDate: '20150305',
-          endDate: '20150326',
-          format: 'json'
-        },
-        success: function(response){
-          console.log(response);
-          console.log(processData(response));
-          generateChart(processData(response));
-        }
-      });
-    } // ajaxin' stuff
-
-    function getMean(myArray) {
-      var mean = myArray.reduce(function(a,b){
-        return a + b;
-      })/myArray.length;
-      return mean.toFixed(2);
-    } // getMean
-
-    function getMedian(myArray) {
-      var median;
-      var sorted = myArray.sort(myArray);
-      var middleIndex = Math.floor(sorted.length/2)
-      if (sorted.length % 2 === 0) {
-        var medianA = sorted[middleIndex];
-        var medianB = sorted[middleIndex - 1];
-        median = (medianA + medianB)/2;
-      } else {
-        median = sorted[middleIndex];
-      }
-
-      return median.toFixed(2);
-    } // getMedian
-
-    function processData(data) {
-      var myData = [];
-
-      var myDates = ['x'];
-      var meanTemps = ['Mean Temperature'];
-      var medTemps = ['Median Temperature'];
-      var meanPress = ['Mean Pressure'];
-      var medPress = ['Median Pressure'];
-      var meanSpeeds = ['Mean Speed'];
-      var medSpeeds = ['Median Speed'];
-
-      for (var key in data) {
-        if (data.hasOwnProperty(key)) {
-          if ((data[key].t !== null) &&
-          (data[key].p !== null) &&
-          (data[key].s !== null)) {
-            myDates.push(key);
-            meanTemps.push(getMean(data[key].t));
-            medTemps.push(getMedian(data[key].t));
-            meanPress.push(getMean(data[key].p));
-            medPress.push(getMedian(data[key].p));
-            meanSpeeds.push(getMean(data[key].s));
-            medSpeeds.push(getMedian(data[key].s));
-          } // data is not null
-        } // hasOwnProperty
-      } // for key in data
-      myData.push(myDates, meanTemps, medTemps, meanPress, medPress, meanSpeeds, medSpeeds);
-      return myData;
-    } // processData
-
-    function generateChart(data) {
-      var chart = c3.generate({
-
-        data: {
-          x: 'x',
-          columns: data,
-          type: 'bar',
-          groups: [
-            [
-            'Mean Temperature',
-            'Median Temperature',
-            'Mean Pressure',
-            'Median Pressure',
-            'Mean Speed',
-            'Median Speed'
-            ]
-          ]
-        },
-        bar: {
-          width: {
-            ratio: 0.3
-          }
-        },
-        axis: {
-          x: {
-            type: 'timeseries'
-          }
-        }, // axis
-        subchart: {
-          show: true
-        }
-      }); // chart
-    } // generateChart
-
-    // ajaxData();
-    loadChart();
-  }); //page loaded
-</script>
+<script src="/js/lynda-code-clinic-01.js"></script>
 
 </body>
 </html>
