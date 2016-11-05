@@ -37,8 +37,8 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script type="text/html" id="jquery-template">
     <div class="one-half column" style="margin-top: 25%; border: 1px solid #ccc;">
-      <h4 data-content="title">Lets get into it</h4>
-      <p data-content="copy">This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+      <h4 data-content="title" data-format="UpperCaseFormatter" data-format-options="herp"></h4>
+      <p data-content="copy"></p>
     </div>
   </script><!-- jQuery Template -->
 
@@ -50,18 +50,25 @@
   </div><!-- jQuery Container -->
 
   <script type="text/javascript">
-    function renderjQueryTemplates(e) {
-        $('#jquery-container').loadTemplate("#jquery-template", [
-          {
-          title: 'jQuery Templating',
-          copy: 'nerp derp' },
-          {
-          title: 'Pho Sure',
-          copy: 'lol' },
-        ]);
-    }
 
-    window.addEventListener("load", renderjQueryTemplates());
+
+    $("document").ready(function() {
+      $.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
+        return value.toUpperCase();
+      });
+
+      function renderjQueryTemplates(e) {
+          $('#jquery-container').loadTemplate("#jquery-template", [
+            {
+            title: 'jQuery Templating',
+            copy: 'nerp derp' },
+            {
+            title: 'Pho Sure',
+            copy: 'lol' },
+          ]);
+      }
+      renderjQueryTemplates();
+    });
 
   </script>
 
