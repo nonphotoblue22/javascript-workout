@@ -1,140 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <title>JS Practice &ndash; + Pure.css Layout Example</title>
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-  <link rel="stylesheet" href="css/libs/c3.min.css">
-  <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
-  <![endif]-->
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-  <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-  <!--<![endif]-->
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
 
-  <!--[if lte IE 8]>
-    <link rel="stylesheet" href="css/layouts/blog-old-ie.css">
-  <![endif]-->
-
-  <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="css/layouts/blog.css">
-  <!--<![endif]-->
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
 <body>
 
-<div id="layout" class="pure-g">
-  <div class="sidebar pure-u-1 pure-u-md-1-4">
-    <div class="header">
-      <h1 class="brand-title">Javascript Exercizesss</h1>
-      <nav class="nav">
-        <h2 class="brand-tagline">Lynda JS Code Clinic</h2>
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a class="pure-button" href="">Mean and Medium</a>
-          </li>
-        </ul>
-      </nav>
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <h4>Basic Page</h4>
+        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+      </div>
     </div>
   </div>
 
-  <div class="content pure-u-1 pure-u-md-3-4">
-    <div>
-      <!-- A wrapper for all the blog posts -->
-      <div class="posts">
-        <h1 class="content-subhead">Exercise</h1>
-
-        <!-- A single blog post -->
-        <section class="post">
-          <header class="post-header">
-            <h2 class="post-title">Mean And Medium</h2>
-
-            <p class="post-meta">
-              6.29.2015 -  <a class="post-category post-category-design" href="#">Lynda JS Code Clinic</a> <a class="post-category post-category-pure" href="#">AJAX</a> <a class="post-category post-category-js" href="#">JSON</a>
-            </p>
-          </header>
-
-          <div class="post-description">
-            <p>
-            In the Lynda challenge, the goal was to calculate the mean and median of the wind speed,
-            air temperature, and barometric pressure, recorded at the Deep Moor station
-            for a given range of dates using javascript as the chosen language. The data
-            would be taken from a list the US Navy compiles during their submarine testing in Lake Pend Oreille.
-            Weather statistics such as wind speed, air temperature, and barometric
-            pressure should be ajaxed in by using a restful api that returned a jsonp object filled with data from this site:
-            http://lpo.dt.navy.mil.
-            </p>
-            <h4>Reflections</h4>
-            <p>
-            For this exercise I was just concentrating on getting a successful response from
-            the api and writing a mean and median functionality. After comparing my solutions to the offered
-            solutions, there were a few things that really stood out to me that I hope
-            to take away. Firstly, the lynda solutions did a much better job of
-            abstracting out the functionality and keeping code simple. For example, their solutions to the mean function simply
-            takes an array argument and uses the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">reduce</a>
-            method to add everything up in that array argument, and simply divides that
-            sum by the total number of the items in the array. The final step was
-            setting the returned mean to a nicer fixed point value.
-            <br />
-            I'm happy that my mean solution returned the correct mean values, but
-            becuase I didn't know about the reduce method I feel that my function was a bit more
-            cumbersome. Instead, I used a for loop to loop through the length of the
-            array, and used the counter to slice each individual item into a variable to be parsed to a
-            floating point integer. Then, I used an additional assignment operator to
-            add it to a 'MeanTotal' variable. Once the loop was finished, the total sum of the
-            array values were divided by the total array length giving the accurate mean value
-            (possibly too accurate, I probably should've used the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed</a>
-            function to return a nice number).
-            </p>
-            <h4>Going Further</h4>
-            <p>
-            The lesson went on to actually complete the solution really thouroughly. They visualized the
-            data and created drop down menus to dynamically update the range of dates. While
-            those weren't in the scope of my personal goal for the challenge, I
-            followed along and completed the interesting parts of the challenge. It was
-            really the first time I had seen and used the <a
-            href="http://c3js.org/">c3</a> library, which is an impressive tool. Also,
-            it was really good to go through the neccessary steps to massage the data so
-            c3 could display the data correctly. It was surprising how much more work that
-            was than I had thought about the problem before watching and following their
-            suggested solution. Below is the product of their suggested solution.
-            </p>
-          </div>
-          <div class="post-content">
-            <a class="pure-button pure-button-primary">My Solution</a>
-          </div>
-        </section>
-        <h4>Provided Solution</h4>
-        <figure>
-          <div id="chart"></div>
-          <figcaption>Click and drag on the bottom chart to see a smaller range</figcaption>
-        </figure>
-      </div>
-
-
-
-      <div class="footer">
-        <div class="pure-menu pure-menu-horizontal">
-          <ul>
-            <li class="pure-menu-item"><a href="" class="pure-menu-link">About</a></li>
-            <li class="pure-menu-item"><a href="" class="pure-menu-link">Twitter</a></li>
-            <li class="pure-menu-item"><a href="" class="pure-menu-link">GitHub</a></li>
-          </ul>
-        </div>
-      </div><!-- /.footer -->
-    </div><!-- .box? -->
-  </div><!-- /.content -->
-</div><!-- /.layout -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="/js/libs/d3.min.js" charset="utf-8"></script>
-<script src="/js/libs/c3.min.js"></script>
-<script src="/js/lynda-code-clinic-01.js"></script>
-
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>
