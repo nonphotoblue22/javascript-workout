@@ -42,21 +42,43 @@
     </div>
   </script><!-- jQuery Template -->
 
-  <div class="container" id="jquery-container">
-    <div class="container">
+    <div class="container" id="jquery-container">
       <div class="row">
       </div>
+    </div><!-- jQuery Container -->
+    <div class="container">
+      <div class="row">
+        <button type="button" name="previous">Previous</button>
+        <button type="button" name="next">Next</button>
+      </div>
     </div>
-  </div><!-- jQuery Container -->
+
+
 
   <script type="text/javascript">
 
 
     $("document").ready(function() {
       // set up empty var for grabbing data
-      var jQueryData;
+      var jQueryData = null;
+      var currPage = 1;
 
+      // event listeners for click of buttons
+      $('button[name="previous"]').on("click", function() {
+        // check if current page is greater than one (the first page)
+        if (currPage > 1) {
+          --currPage;
+          console.log('previous: ' + currPage);
+        }
+      });
 
+      $('button[name="next"]').on("click", function() {
+        // add counter to currPage if less than max number of items in array
+        if (currPage < 4) {
+          ++currPage;
+          console.log('next: ' + currPage);
+        }
+      });
 
       //formatter
       $.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
@@ -65,15 +87,19 @@
 
       // load template - https://github.com/codepb/jquery-template
       // $('#template-to-load-into').loadTemplate("/path/to/template", data, {options});
-      function renderjQueryTemplates(container, template, data) {
-        $(container).loadTemplate(template, data);
+      function renderjQueryTemplates(container, template, data, pageNo) {
+        $(container).loadTemplate(template, data, {
+          paged: true,
+          pageNo: pageNo,
+          elemPerPage: 1
+        });
       }
 
       //pull in json from data and add it to the template
       $.getJSON("js/data/jqueryTemplateData.json", function(data){
         jQueryData = data;
         console.log(jQueryData);
-        renderjQueryTemplates("#jquery-container", "#jquery-template", jQueryData);
+        renderjQueryTemplates("#jquery-container", "#jquery-template", jQueryData, currPage);
       });
 
 
