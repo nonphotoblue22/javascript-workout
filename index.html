@@ -35,12 +35,6 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/html" id="jquery-template">
-    <div class="one-half column" style="margin-top: 25%; border: 1px solid #ccc;">
-      <h4 data-content="title" data-format="UpperCaseFormatter" data-format-options="herp"></h4>
-      <p data-content="copy"></p>
-    </div>
-  </script><!-- jQuery Template -->
 
     <div class="container" id="jquery-container">
       <div class="row">
@@ -99,7 +93,7 @@
       $.getJSON("js/data/jqueryTemplateData.json", function(data){
         jQueryData = data;
         console.log(jQueryData);
-        renderjQueryTemplates("#jquery-container", "#jquery-template", jQueryData, currPage);
+        renderjQueryTemplates("#jquery-container", "jqueryTemplate.html", jQueryData, currPage);
       });
 
 
