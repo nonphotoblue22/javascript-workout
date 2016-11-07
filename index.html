@@ -53,20 +53,25 @@
 
 
     $("document").ready(function() {
+      var data = [
+        {
+          title: 'jQuery Templating',
+          copy: 'nerp derp'
+        },{
+          title: 'Pho Sure',
+          copy: 'lol'
+        }
+      ];
+
+      //formatter
       $.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
         return value.toUpperCase();
       });
 
+      // load template - https://github.com/codepb/jquery-template
+      // $('#template-to-load-into').loadTemplate("/path/to/template", data, {options});
       function renderjQueryTemplates(e) {
-        $('#jquery-container').loadTemplate("#jquery-template", [
-          {
-            title: 'jQuery Templating',
-            copy: 'nerp derp'
-          },{
-            title: 'Pho Sure',
-            copy: 'lol'
-          }
-        ]);
+        $('#jquery-container').loadTemplate("#jquery-template", data);
       }
 
       renderjQueryTemplates();
