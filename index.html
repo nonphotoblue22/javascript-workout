@@ -53,15 +53,10 @@
 
 
     $("document").ready(function() {
-      var data = [
-        {
-          title: 'jQuery Templating',
-          copy: 'nerp derp'
-        },{
-          title: 'Pho Sure',
-          copy: 'lol'
-        }
-      ];
+      // set up empty var for grabbing data
+      var jQueryData;
+
+
 
       //formatter
       $.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
@@ -70,11 +65,18 @@
 
       // load template - https://github.com/codepb/jquery-template
       // $('#template-to-load-into').loadTemplate("/path/to/template", data, {options});
-      function renderjQueryTemplates(e) {
-        $('#jquery-container').loadTemplate("#jquery-template", data);
+      function renderjQueryTemplates(container, template, data) {
+        $(container).loadTemplate(template, data);
       }
 
-      renderjQueryTemplates();
+      //pull in json from data and add it to the template
+      $.getJSON("js/data/jqueryTemplateData.json", function(data){
+        jQueryData = data;
+        console.log(jQueryData);
+        renderjQueryTemplates("#jquery-container", "#jquery-template", jQueryData);
+      });
+
+
     });
 
   </script>
