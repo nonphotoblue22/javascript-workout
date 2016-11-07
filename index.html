@@ -57,23 +57,6 @@
       var jQueryData = null;
       var currPage = 1;
 
-      // event listeners for click of buttons
-      $('button[name="previous"]').on("click", function() {
-        // check if current page is greater than one (the first page)
-        if (currPage > 1) {
-          --currPage;
-          console.log('previous: ' + currPage);
-        }
-      });
-
-      $('button[name="next"]').on("click", function() {
-        // add counter to currPage if less than max number of items in array
-        if (currPage < 4) {
-          ++currPage;
-          console.log('next: ' + currPage);
-        }
-      });
-
       //formatter
       $.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
         return value.toUpperCase();
@@ -96,6 +79,22 @@
         renderjQueryTemplates("#jquery-container", "jqueryTemplate.html", jQueryData, currPage);
       });
 
+      // event listeners for click of buttons
+      $('button[name="previous"]').on("click", function() {
+        // check if current page is greater than one (the first page)
+        if (currPage > 1) {
+          renderjQueryTemplates("#jquery-container", "jqueryTemplate.html", jQueryData, --currPage);
+          console.log('previous: ' + currPage);
+        }
+      });
+
+      $('button[name="next"]').on("click", function() {
+        // add counter to currPage if less than max number of items in array
+        if (currPage < 4) {
+          renderjQueryTemplates("#jquery-container", "jqueryTemplate.html", jQueryData, ++currPage);
+          console.log('next: ' + currPage);
+        }
+      });
 
     });
 
