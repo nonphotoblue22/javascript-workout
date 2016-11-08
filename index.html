@@ -47,7 +47,21 @@
       </div>
     </div>
 
+    <div class="container">
+      <h2>The Principles of Interaction Design</h2>
+      <p>
+        Courtesy of Bruce Tognazzini. Check out the original <a href="http://asktog.com/atc/principles-of-interaction-design/">here</a>.a
+      </p>
+      <div class="row" id="ixd-principles-container">
+      </div>
+    </div><!-- IxD-Principles Container -->
 
+  <script type="text/javascript" id="ixd-principle">
+    <div class="three columns"  style="background: #ccc;">
+      <h4 data-content="principleTitle"></h4>
+      <img data-src="thumbnailImg" />
+    </div><!-- ixd-principle- Template -->
+  </script>
 
   <script type="text/javascript">
 
@@ -96,7 +110,27 @@
         }
       });
 
-    });
+      $("#ixd-principles-container").loadTemplate("#ixd-principle", [
+        {
+          "principleTitle": "Aesthetics",
+          "thumbnailImg": "/img/processing_scraped_11_7_2016/processing_00000.jpg",
+          "url": ""
+        },{
+          "principleTitle": "Anticipation",
+          "thumbnailImg": "/img/processing_scraped_11_7_2016/processing_00001.jpg",
+          "url": ""
+        },{
+          "principleTitle": "Autonomy",
+          "thumbnailImg": "/img/processing_scraped_11_7_2016/processing_00002.jpg",
+          "url": ""
+        },{
+          "principleTitle": "Color",
+          "thumbnailImg": "/img/processing_scraped_11_7_2016/processing_00003.jpg",
+          "url": ""
+        }
+      ]);
+
+    });//doc.ready
 
   </script>
 
